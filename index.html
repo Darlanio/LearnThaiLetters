@@ -1,0 +1,323 @@
+<HTML>
+  <BODY>
+    <DIV id="score" style="color: white">Score: 0</DIV>
+    <DIV id="ROW1" style="display: none">
+	  <DIV id="A1" style="display: none"><IMG id="imgA1" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(0);"></DIV>
+	  <DIV id="B1" style="display: none"><IMG id="imgB1" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(1);"></DIV>
+	  <DIV id="C1" style="display: none"><IMG id="imgC1" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(2);"></DIV>
+	</DIV>
+    <DIV id="ROW2" style="display: none; text-align: center">
+	  <DIV id="A1Info" style="display: none; color: white; width: 100%; align: center; font-size: 18pt"></DIV>
+	  <DIV id="A2" style="display: none"><IMG id="imgA2" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(3);"></DIV>
+	  <DIV id="B2" style="display: none"><IMG id="imgB2" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(4);"></DIV>
+	  <DIV id="C2" style="display: none"><IMG id="imgC2" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(5);"></DIV>
+	</DIV>
+    <DIV id="ROW3" style="display: none">
+	  <DIV id="A3" style="display: none"><IMG id="imgA3" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(6);"></DIV>
+	  <DIV id="B3" style="display: none"><IMG id="imgB3" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(7);"></DIV>
+	  <DIV id="C3" style="display: none"><IMG id="imgC3" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(8);"></DIV>
+	</DIV>	
+  </BODY>
+</HTML>
+<script>
+
+var thaiLetterDirectory = ".\\";
+
+var thaiLetter = [
+  "001gai.jpg",
+  "002khai.jpg",
+  "003khuuat.jpg",
+  "004khwaai.jpg",
+  "005khon.jpg",
+  "006rakang.jpg",
+  "007nguu.jpg",
+  "008jaan.jpg",
+  "009ching.jpg",
+  "010chaang.jpg",
+  "011soo.jpg",
+  "012chooe.jpg",
+  "013ying.jpg",
+  "014chadaa.jpg",
+  "015bpatak.jpg",
+  "016thaan.jpg",
+  "017monthoo.jpg",
+  "018phuuthao.jpg",
+  "019neen.jpg",
+  "020dek.jpg",
+  "021dtao.jpg",
+  "022thung.jpg",
+  "023thahaan.jpg",
+  "024thong.jpg",
+  "025nuu.jpg",
+  "026baimaai.jpg",
+  "027bplaa.jpg",
+  "028phueng.jpg",
+  "029faa.jpg",
+  "030phaan.jpg",
+  "031fan.jpg",
+  "032samphao.jpg",
+  "033maa.jpg",
+  "034yak.jpg",
+  "035ruuea.jpg",
+  "036ling.jpg",
+  "037waaen.jpg",
+  "038saalaa.jpg",
+  "039ruuesii.jpg",
+  "040sua.jpg",
+  "041hiip.jpg",
+  "042julaa.jpg",
+  "043aaang.jpg",
+  "044nokhook.jpg"
+];
+
+var thaiLetterName = [
+  "Gor Gai",
+  "Khor Khai",
+  "Khor Khuat",
+  "Khor Khwai",
+  "Khor Khon",
+  "Khor Rakhang",
+  "Ngor Ngoo",
+  "Jor Jan",
+  "Chor Ching",
+  "Chor Chaang",
+  "Sor Soh",
+  "Chor Choe",
+  "Yor Ying",
+  "Dor Chada",
+  "Tor Patak",
+  "Thor Than",
+  "Thor Nang Montho",
+  "Thor Phothao",
+  "Nor Nen",
+  "Dor Dek",
+  "Dtor Dtao",
+  "Thor Thung",
+  "Thor Thahan",
+  "Thor Thung",
+  "Nor Noo",
+  "Bor Bai Mai",
+  "Bpor Bpla",
+  "Phor Pheung",
+  "For Faa",
+  "Phor Phan",
+  "For Fan",
+  "Phor Samphao",
+  "Mor Maa",
+  "Yor Yak",
+  "Ror Reua",
+  "Lor Ling",
+  "Wor Waen",
+  "Sor Sala",
+  "Sor Reusee",
+  "Sor Seua",
+  "Hor Heep",
+  "Lor Jula",
+  "Or Aang",
+  "Hor Nokhook"
+];
+
+var phase = [
+  blackBackgroundOnly,
+  oneRandomThaiLetter,
+  blackBackgroundOnly,
+  fourRandomThaiLetters
+];
+var phaseIndex = 0;
+var phaseMax = phase.length;
+
+var thaiLetterIndex = 0;
+var chosenThaiLetter = 0;
+var randomThaiLetter = [ 0, 0, 0, 0 ];
+
+var score;
+var allElement = [ "ROW1", "ROW2", "ROW3", "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3", "A1Info" ];
+
+function flashGreen()
+{
+  document.body.style.backgroundColor = "green";
+  allElement.forEach(item => {
+    document.getElementById(item).style.display="none";
+  });
+  score++;
+  document.getElementById("score").innerHTML="SCORE: " + score;
+  setTimeout(nextPhase, 999);
+}
+
+function flashRed()
+{
+  document.body.style.backgroundColor = "red";
+  allElement.forEach(item => {
+    document.getElementById(item).style.display="none";
+  });
+
+  score--;
+  if(score<0) score=0;
+  document.getElementById("score").innerHTML="SCORE: " + score;
+  phaseIndex=1;
+  setTimeout(displayOneRandomThaiLetter, 999);
+}
+
+function answer(value)
+{
+  var isCorrect=0;
+  chosenThaiLetter = value;
+  if(chosenThaiLetter==0 && randomThaiLetter[0]==thaiLetterIndex) isCorrect=1;
+  if(chosenThaiLetter==1 && randomThaiLetter[1]==thaiLetterIndex) isCorrect=1;
+  if(chosenThaiLetter==3 && randomThaiLetter[2]==thaiLetterIndex) isCorrect=1;
+  if(chosenThaiLetter==4 && randomThaiLetter[3]==thaiLetterIndex) isCorrect=1;
+  
+  if(isCorrect==1) {
+    setTimeout(flashGreen);
+  } else {
+    setTimeout(flashRed);
+  }
+}
+
+function displayFourRandomThaiLetters()
+{
+  var element = document.getElementById("ROW1");
+  element.style.width="100%";
+  element.style.height="50%";
+  element.style.display="table-row";
+  
+  element = document.getElementById("ROW2");
+  element.style.width="100%";
+  element.style.height="50%";
+  element.style.display="table-row";
+  
+  element = document.getElementById("A1");
+  element.style.width="50%";
+  element.style.height="50%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgA1");
+  element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[0]];
+
+  element = document.getElementById("B1");
+  element.style.width="50%";
+  element.style.height="50%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgB1");
+  element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[1]];
+
+  element = document.getElementById("A2");
+  element.style.width="50%";
+  element.style.height="50%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgA2");
+  element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[2]];
+
+  element = document.getElementById("B2");
+  element.style.width="50%";
+  element.style.height="50%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgB2");
+  element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[3]];
+
+}
+
+function fourRandomThaiLetters()
+{
+  var tmp = 0;
+  var index = 0;
+
+  document.body.style.backgroundColor = "black";
+
+  randomThaiLetter[0] = thaiLetterIndex;
+  randomThaiLetter[1] = Math.floor(Math.random() * 15);
+  while(randomThaiLetter[1]==randomThaiLetter[0]) randomThaiLetter[1] = Math.floor(Math.random() * 15);
+  randomThaiLetter[2] = Math.floor(Math.random() * 15) + 15;
+  while(randomThaiLetter[2]==randomThaiLetter[0]) randomThaiLetter[2] = Math.floor(Math.random() * 15);
+  randomThaiLetter[3] = Math.floor(Math.random() * 14) + 30;
+  while(randomThaiLetter[3]==randomThaiLetter[0]) randomThaiLetter[3] = Math.floor(Math.random() * 15);
+  
+  index = Math.floor(Math.random() * 4);
+  tmp=randomThaiLetter[0];
+  randomThaiLetter[0]=randomThaiLetter[index];
+  randomThaiLetter[index]=tmp;
+	
+  index = Math.floor(Math.random() * 3) + 1;
+  tmp=randomThaiLetter[1];
+  randomThaiLetter[1]=randomThaiLetter[index];
+  randomThaiLetter[index]=tmp;
+
+  index = Math.floor(Math.random() * 2) + 2;
+  tmp=randomThaiLetter[2];
+  randomThaiLetter[2]=randomThaiLetter[index];
+  randomThaiLetter[index]=tmp;
+  
+  displayFourRandomThaiLetters();
+}
+
+function displayOneRandomThaiLetter()
+{
+  document.body.style.backgroundColor = "black";
+
+  var element = document.getElementById("ROW1");
+  element.style.width="100%";
+  element.style.height="90%";
+  element.style.display="table-row";
+  
+  element = document.getElementById("A1");
+  element.style.width="100%";
+  element.style.height="90%";
+  element.style.display="table-cell";
+  
+  element = document.getElementById("imgA1");
+  element.src = thaiLetterDirectory + thaiLetter[thaiLetterIndex];
+
+
+
+  element = document.getElementById("ROW2");
+  element.style.width="100%";
+  element.style.height="10%";
+  element.style.display="block";
+
+  element = document.getElementById("A1Info");
+  element.style.width="100%";
+  element.style.height="10%";
+  element.style.display="inline-block";
+  element.innerHTML=thaiLetterName[thaiLetterIndex];
+  
+
+  setTimeout(nextPhase, 2999);
+}
+
+function oneRandomThaiLetter()
+{
+  thaiLetterIndex = Math.floor(Math.random() * thaiLetter.length);
+  displayOneRandomThaiLetter();
+}
+
+function blackBackgroundOnly()
+{
+  document.body.style.backgroundColor = "black";
+  allElement.forEach(item => {
+    document.getElementById(item).style.display="none";
+  });
+  setTimeout(nextPhase, 999);
+}
+
+function nextPhase()
+{
+  phaseIndex++;
+  if(phaseIndex>=phaseMax) {
+    phaseIndex=0;
+  }
+  phase[phaseIndex]();
+}
+
+function main()
+{
+  score=0;
+  phaseIndex=0;
+  phase[phaseIndex]();
+}
+
+main();
+
+</script>
