@@ -128,7 +128,7 @@ var phaseMax = phase.length;
 
 var thaiLetterIndex = 0;
 var chosenThaiLetter = 0;
-var randomThaiLetter = [ 0, 0, 0, 0 ];
+var randomThaiLetter = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 
 var score;
 var allElement = [ "ROW1", "ROW2", "ROW3", "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3", "A1Info" ];
@@ -161,12 +161,18 @@ function flashRed()
 function answer(value)
 {
   var isCorrect=0;
+  var i=0;
   chosenThaiLetter = value;
-  if(chosenThaiLetter==0 && randomThaiLetter[0]==thaiLetterIndex) isCorrect=1;
-  if(chosenThaiLetter==1 && randomThaiLetter[1]==thaiLetterIndex) isCorrect=1;
-  if(chosenThaiLetter==3 && randomThaiLetter[2]==thaiLetterIndex) isCorrect=1;
-  if(chosenThaiLetter==4 && randomThaiLetter[3]==thaiLetterIndex) isCorrect=1;
-  
+  if(score<10) {
+    if(chosenThaiLetter==0 && randomThaiLetter[0]==thaiLetterIndex) isCorrect=1;
+    if(chosenThaiLetter==1 && randomThaiLetter[1]==thaiLetterIndex) isCorrect=1;
+    if(chosenThaiLetter==3 && randomThaiLetter[2]==thaiLetterIndex) isCorrect=1;
+    if(chosenThaiLetter==4 && randomThaiLetter[3]==thaiLetterIndex) isCorrect=1;
+  } else {
+    for(i=0;i<9;i++) {
+      if(chosenThaiLetter==i && randomThaiLetter[i]==thaiLetterIndex) isCorrect=1;
+    }  
+  }  
   if(isCorrect==1) {
     setTimeout(flashGreen);
   } else {
@@ -217,7 +223,96 @@ function displayFourRandomThaiLetters()
 
   element = document.getElementById("imgB2");
   element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[3]];
+}
 
+function displayNineRandomThaiLetters()
+{
+  var element = document.getElementById("ROW1");
+  element.style.width="100%";
+  element.style.height="30%";
+  element.style.display="table-row";
+  
+  element = document.getElementById("ROW2");
+  element.style.width="100%";
+  element.style.height="30%";
+  element.style.display="table-row";
+
+  element = document.getElementById("ROW3");
+  element.style.width="100%";
+  element.style.height="30%";
+  element.style.display="table-row";
+  
+  element = document.getElementById("A1");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgA1");
+  element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[0]];
+
+  element = document.getElementById("B1");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgB1");
+  element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[1]];
+
+  element = document.getElementById("C1");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgC1");
+  element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[2]];
+
+  element = document.getElementById("A2");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+  
+  element = document.getElementById("imgA2");
+  element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[3]];
+
+  element = document.getElementById("B2");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgB2");
+  element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[4]];
+
+  element = document.getElementById("C2");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgC2");
+  element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[5]];
+
+  element = document.getElementById("A3");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+  
+  element = document.getElementById("imgA3");
+  element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[6]];
+
+  element = document.getElementById("B3");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgB3");
+  element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[7]];
+
+  element = document.getElementById("C3");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgC3");
+  element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[8]];
 }
 
 function fourRandomThaiLetters()
@@ -226,31 +321,65 @@ function fourRandomThaiLetters()
   var index = 0;
 
   document.body.style.backgroundColor = "black";
-
-  randomThaiLetter[0] = thaiLetterIndex;
-  randomThaiLetter[1] = Math.floor(Math.random() * 15);
-  while(randomThaiLetter[1]==randomThaiLetter[0]) randomThaiLetter[1] = Math.floor(Math.random() * 15);
-  randomThaiLetter[2] = Math.floor(Math.random() * 15) + 15;
-  while(randomThaiLetter[2]==randomThaiLetter[0]) randomThaiLetter[2] = Math.floor(Math.random() * 15);
-  randomThaiLetter[3] = Math.floor(Math.random() * 14) + 30;
-  while(randomThaiLetter[3]==randomThaiLetter[0]) randomThaiLetter[3] = Math.floor(Math.random() * 15);
+  if(score < 10) {
+    randomThaiLetter[0] = thaiLetterIndex;
+    randomThaiLetter[1] = Math.floor(Math.random() * 15);
+    while(randomThaiLetter[1]==randomThaiLetter[0]) randomThaiLetter[1] = Math.floor(Math.random() * 15);
+    randomThaiLetter[2] = Math.floor(Math.random() * 15) + 15;
+    while(randomThaiLetter[2]==randomThaiLetter[0]) randomThaiLetter[2] = Math.floor(Math.random() * 15) + 15;
+    randomThaiLetter[3] = Math.floor(Math.random() * 14) + 30;
+    while(randomThaiLetter[3]==randomThaiLetter[0]) randomThaiLetter[3] = Math.floor(Math.random() * 14) + 30;
   
-  index = Math.floor(Math.random() * 4);
-  tmp=randomThaiLetter[0];
-  randomThaiLetter[0]=randomThaiLetter[index];
-  randomThaiLetter[index]=tmp;
+    index = Math.floor(Math.random() * 4);
+    tmp=randomThaiLetter[0];
+    randomThaiLetter[0]=randomThaiLetter[index];
+    randomThaiLetter[index]=tmp;
 	
-  index = Math.floor(Math.random() * 3) + 1;
-  tmp=randomThaiLetter[1];
-  randomThaiLetter[1]=randomThaiLetter[index];
-  randomThaiLetter[index]=tmp;
+    index = Math.floor(Math.random() * 3) + 1;
+    tmp=randomThaiLetter[1];
+    randomThaiLetter[1]=randomThaiLetter[index];
+    randomThaiLetter[index]=tmp;
 
-  index = Math.floor(Math.random() * 2) + 2;
-  tmp=randomThaiLetter[2];
-  randomThaiLetter[2]=randomThaiLetter[index];
-  randomThaiLetter[index]=tmp;
+    index = Math.floor(Math.random() * 2) + 2;
+    tmp=randomThaiLetter[2];
+    randomThaiLetter[2]=randomThaiLetter[index];
+    randomThaiLetter[index]=tmp;
   
-  displayFourRandomThaiLetters();
+    displayFourRandomThaiLetters();
+  } else {
+    randomThaiLetter[0] = thaiLetterIndex;
+    randomThaiLetter[1] = Math.floor(Math.random() * 5);
+    while(randomThaiLetter[1]==randomThaiLetter[0]) randomThaiLetter[1] = Math.floor(Math.random() * 5);
+    randomThaiLetter[2] = Math.floor(Math.random() * 6) + 5;
+    while(randomThaiLetter[2]==randomThaiLetter[0]) randomThaiLetter[2] = Math.floor(Math.random() * 6) + 5;
+    randomThaiLetter[3] = Math.floor(Math.random() * 5) + 11;
+    while(randomThaiLetter[3]==randomThaiLetter[0]) randomThaiLetter[3] = Math.floor(Math.random() * 5) + 11;
+    randomThaiLetter[4] = Math.floor(Math.random() * 6) + 16;
+    while(randomThaiLetter[4]==randomThaiLetter[0]) randomThaiLetter[4] = Math.floor(Math.random() * 6) + 16;
+    randomThaiLetter[5] = Math.floor(Math.random() * 5) + 22;
+    while(randomThaiLetter[5]==randomThaiLetter[0]) randomThaiLetter[5] = Math.floor(Math.random() * 5) + 22;
+    randomThaiLetter[6] = Math.floor(Math.random() * 6) + 27;
+    while(randomThaiLetter[6]==randomThaiLetter[0]) randomThaiLetter[6] = Math.floor(Math.random() * 6) + 27;
+    randomThaiLetter[7] = Math.floor(Math.random() * 5) + 33;
+    while(randomThaiLetter[7]==randomThaiLetter[0]) randomThaiLetter[7] = Math.floor(Math.random() * 5) + 33;
+    randomThaiLetter[8] = Math.floor(Math.random() * 6) + 38;
+    while(randomThaiLetter[8]==randomThaiLetter[0]) randomThaiLetter[8] = Math.floor(Math.random() * 6) + 38;
+
+    var i=0;
+    for(i=0;i<8;i++) {	
+      index = Math.floor(Math.random() * (9-i));
+      tmp=randomThaiLetter[i];
+      randomThaiLetter[i]=randomThaiLetter[index];
+      randomThaiLetter[index]=tmp;
+	}
+    for(i=0;i<8;i++) {	
+      index = Math.floor(Math.random() * (9-i));
+      tmp=randomThaiLetter[i];
+      randomThaiLetter[i]=randomThaiLetter[index];
+      randomThaiLetter[index]=tmp;
+	}  
+    displayNineRandomThaiLetters();
+  }
 }
 
 function displayOneRandomThaiLetter()
