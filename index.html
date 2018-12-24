@@ -1,22 +1,22 @@
 <HTML>
   <BODY>
+	<canvas id='textCanvas' style="display: none; color: white; height: 80px"></canvas>
     <DIV id="score" style="color: white">Score: 0</DIV>
-    <DIV id="ROW1" style="display: none">
-	  <DIV id="A1" style="display: none"><IMG id="imgA1" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(0);"></DIV>
-	  <DIV id="B1" style="display: none"><IMG id="imgB1" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(1);"></DIV>
-	  <DIV id="C1" style="display: none"><IMG id="imgC1" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(2);"></DIV>
+    <DIV id="ROW1" style="display: none; text-align: center">
+	  <DIV id="A1" style="display: none"><IMG id="imgA1" SRC="001gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(0);"><DIV id="txtA1" style="display: block; color: white; width: 100%; align: center; font-size: 24pt" onclick="answer(0);"></DIV></DIV>
+	  <DIV id="B1" style="display: none"><IMG id="imgB1" SRC="001gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(1);"><DIV id="txtB1" style="display: block; color: white; width: 100%; align: center; font-size: 24pt" onclick="answer(1);"></DIV></DIV>
+	  <DIV id="C1" style="display: none"><IMG id="imgC1" SRC="001gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(2);"><DIV id="txtC1" style="display: block; color: white; width: 100%; align: center; font-size: 24pt" onclick="answer(2);"></DIV></DIV>
 	</DIV>
     <DIV id="ROW2" style="display: none; text-align: center">
-	  <DIV id="A1Info" style="display: none; color: white; width: 100%; align: center; font-size: 18pt"></DIV>
-	  <DIV id="A2" style="display: none"><IMG id="imgA2" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(3);"></DIV>
-	  <DIV id="B2" style="display: none"><IMG id="imgB2" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(4);"></DIV>
-	  <DIV id="C2" style="display: none"><IMG id="imgC2" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(5);"></DIV>
+	  <DIV id="A2" style="display: none"><IMG id="imgA2" SRC="001gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(3);"><DIV id="txtA2" style="display: block; color: white; width: 100%; align: center; font-size: 24pt" onclick="answer(3);"></DIV></DIV>
+	  <DIV id="B2" style="display: none"><IMG id="imgB2" SRC="001gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(4);"><DIV id="txtB2" style="display: block; color: white; width: 100%; align: center; font-size: 24pt" onclick="answer(4);"></DIV></DIV>
+	  <DIV id="C2" style="display: none"><IMG id="imgC2" SRC="001gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(5);"><DIV id="txtC2" style="display: block; color: white; width: 100%; align: center; font-size: 24pt" onclick="answer(5);"></DIV></DIV>
 	</DIV>
-    <DIV id="ROW3" style="display: none">
-	  <DIV id="A3" style="display: none"><IMG id="imgA3" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(6);"></DIV>
-	  <DIV id="B3" style="display: none"><IMG id="imgB3" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(7);"></DIV>
-	  <DIV id="C3" style="display: none"><IMG id="imgC3" SRC="001_gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(8);"></DIV>
-	</DIV>	
+    <DIV id="ROW3" style="display: none; text-align: center">
+	  <DIV id="A3" style="display: none"><IMG id="imgA3" SRC="001gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(6);"><DIV id="txtA3" style="display: block; color: white; width: 100%; align: center; font-size: 24pt" onclick="answer(6);"></DIV></DIV>
+	  <DIV id="B3" style="display: none"><IMG id="imgB3" SRC="001gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(7);"><DIV id="txtB3" style="display: block; color: white; width: 100%; align: center; font-size: 24pt" onclick="answer(7);"></DIV></DIV>
+	  <DIV id="C3" style="display: none"><IMG id="imgC3" SRC="001gai.jpg" STYLE="display: block; margin: auto; max-width: 100%; max-height: 100%" onclick="answer(8);"><DIV id="txtC3" style="display: block; color: white; width: 100%; align: center; font-size: 24pt" onclick="answer(8);"></DIV></DIV>
+	</DIV>
   </BODY>
 </HTML>
 <script>
@@ -121,7 +121,9 @@ var phase = [
   blackBackgroundOnly,
   oneRandomThaiLetter,
   blackBackgroundOnly,
-  fourRandomThaiLetters
+  displayNameOfOneRandomThaiLetter,
+  blackBackgroundOnly,
+  randomThaiLetters
 ];
 var phaseIndex = 0;
 var phaseMax = phase.length;
@@ -131,7 +133,8 @@ var chosenThaiLetter = 0;
 var randomThaiLetter = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 
 var score;
-var allElement = [ "ROW1", "ROW2", "ROW3", "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3", "A1Info" ];
+var allElement = [ "ROW1", "ROW2", "ROW3", "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3" ];
+var allTextElement = [ "txtA1", "txtA2", "txtA3", "txtB1", "txtB2", "txtB3", "txtC1", "txtC2", "txtC3" ];
 
 function flashGreen()
 {
@@ -225,6 +228,66 @@ function displayFourRandomThaiLetters()
   element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[3]];
 }
 
+function displayFourRandomThaiLetterNames()
+{
+  var canvas =  document.getElementById('textCanvas');
+  var context = canvas.getContext('2d');
+  
+  var element = document.getElementById("ROW1");
+  element.style.width="100%";
+  element.style.height="50%";
+  element.style.display="table-row";
+  
+  element = document.getElementById("ROW2");
+  element.style.width="100%";
+  element.style.height="50%";
+  element.style.display="table-row";
+  
+  element = document.getElementById("A1");
+  element.style.width="50%";
+  element.style.height="50%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgA1");
+  element.src = thaiLetterDirectory + "000black.jpg";
+
+  element = document.getElementById("txtA1");
+  element.innerHTML = thaiLetterName[randomThaiLetter[0]];
+  
+  element = document.getElementById("B1");
+  element.style.width="50%";
+  element.style.height="50%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgB1");
+  element.src = thaiLetterDirectory + "000black.jpg";
+
+  element = document.getElementById("txtB1");
+  element.innerHTML = thaiLetterName[randomThaiLetter[1]];  
+
+  element = document.getElementById("A2");
+  element.style.width="50%";
+  element.style.height="50%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgA2");
+  element.src = thaiLetterDirectory + "000black.jpg";
+
+  element = document.getElementById("txtA2");
+  element.innerHTML = thaiLetterName[randomThaiLetter[2]];  
+
+  element = document.getElementById("B2");
+  element.style.width="50%";
+  element.style.height="50%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgB2");
+  element.src = thaiLetterDirectory + "000black.jpg";  
+
+  element = document.getElementById("txtB2");
+  element.innerHTML = thaiLetterName[randomThaiLetter[3]];  
+}
+
 function displayNineRandomThaiLetters()
 {
   var element = document.getElementById("ROW1");
@@ -315,7 +378,286 @@ function displayNineRandomThaiLetters()
   element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[8]];
 }
 
-function fourRandomThaiLetters()
+function displayNineRandomThaiLetterNames()
+{
+  var element = document.getElementById("ROW1");
+  element.style.width="100%";
+  element.style.height="30%";
+  element.style.display="table-row";
+  
+  element = document.getElementById("ROW2");
+  element.style.width="100%";
+  element.style.height="30%";
+  element.style.display="table-row";
+
+  element = document.getElementById("ROW3");
+  element.style.width="100%";
+  element.style.height="30%";
+  element.style.display="table-row";
+  
+  element = document.getElementById("A1");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgA1");
+  element.src = thaiLetterDirectory + "000black.jpg";  
+
+  element = document.getElementById("txtA1");
+  element.innerHTML = thaiLetterName[randomThaiLetter[0]];  
+
+  element = document.getElementById("B1");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgB1");
+  element.src = thaiLetterDirectory + "000black.jpg";  
+
+  element = document.getElementById("txtB1");
+  element.innerHTML = thaiLetterName[randomThaiLetter[1]];  
+
+  element = document.getElementById("C1");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgC1");
+  element.src = thaiLetterDirectory + "000black.jpg";  
+
+  element = document.getElementById("txtC1");
+  element.innerHTML = thaiLetterName[randomThaiLetter[2]];  
+
+  element = document.getElementById("A2");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+  
+  element = document.getElementById("imgA2");
+  element.src = thaiLetterDirectory + "000black.jpg";  
+
+  element = document.getElementById("txtA2");
+  element.innerHTML = thaiLetterName[randomThaiLetter[3]];  
+
+  element = document.getElementById("B2");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgB2");
+  element.src = thaiLetterDirectory + "000black.jpg";  
+
+  element = document.getElementById("txtB2");
+  element.innerHTML = thaiLetterName[randomThaiLetter[4]];  
+
+  element = document.getElementById("C2");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgC2");
+  element.src = thaiLetterDirectory + "000black.jpg";  
+
+  element = document.getElementById("txtC2");
+  element.innerHTML = thaiLetterName[randomThaiLetter[5]];  
+
+  element = document.getElementById("A3");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+  
+  element = document.getElementById("imgA3");
+  element.src = thaiLetterDirectory + "000black.jpg";  
+
+  element = document.getElementById("txtA3");
+  element.innerHTML = thaiLetterName[randomThaiLetter[6]];  
+
+  element = document.getElementById("B3");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgB3");
+  element.src = thaiLetterDirectory + "000black.jpg";  
+
+  element = document.getElementById("txtB3");
+  element.innerHTML = thaiLetterName[randomThaiLetter[7]];  
+
+  element = document.getElementById("C3");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  element = document.getElementById("imgC3");
+  element.src = thaiLetterDirectory + "000black.jpg";  
+
+  element = document.getElementById("txtC3");
+  element.innerHTML = thaiLetterName[randomThaiLetter[8]];  
+}
+
+function displayNineRandomThaiLetterMix()
+{
+  var element = document.getElementById("ROW1");
+  element.style.width="100%";
+  element.style.height="30%";
+  element.style.display="table-row";
+  
+  element = document.getElementById("ROW2");
+  element.style.width="100%";
+  element.style.height="30%";
+  element.style.display="table-row";
+
+  element = document.getElementById("ROW3");
+  element.style.width="100%";
+  element.style.height="30%";
+  element.style.display="table-row";
+  
+  element = document.getElementById("A1");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  if(Math.floor(Math.random() * 2)==0) {
+    element = document.getElementById("imgA1");
+    element.src = thaiLetterDirectory + "000black.jpg";  
+
+    element = document.getElementById("txtA1");
+    element.innerHTML = thaiLetterName[randomThaiLetter[0]];
+  } else {
+    element = document.getElementById("imgA1");
+    element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[0]];
+  }
+
+  element = document.getElementById("B1");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  if(Math.floor(Math.random() * 2)==0) {
+    element = document.getElementById("imgB1");
+    element.src = thaiLetterDirectory + "000black.jpg";  
+
+    element = document.getElementById("txtB1");
+    element.innerHTML = thaiLetterName[randomThaiLetter[1]];
+  } else {
+    element = document.getElementById("imgB1");
+    element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[1]];
+  }
+
+  element = document.getElementById("C1");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  if(Math.floor(Math.random() * 2)==0) {
+    element = document.getElementById("imgC1");
+    element.src = thaiLetterDirectory + "000black.jpg";  
+
+    element = document.getElementById("txtC1");
+    element.innerHTML = thaiLetterName[randomThaiLetter[2]];
+  } else {
+    element = document.getElementById("imgC1");
+    element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[2]];
+  }
+
+  element = document.getElementById("A2");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  if(Math.floor(Math.random() * 2)==0) {
+    element = document.getElementById("imgA2");
+    element.src = thaiLetterDirectory + "000black.jpg";  
+
+    element = document.getElementById("txtA2");
+    element.innerHTML = thaiLetterName[randomThaiLetter[3]];
+  } else {
+    element = document.getElementById("imgA2");
+    element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[3]];
+  }
+
+  element = document.getElementById("B2");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  if(Math.floor(Math.random() * 2)==0) {
+    element = document.getElementById("imgB2");
+    element.src = thaiLetterDirectory + "000black.jpg";  
+
+    element = document.getElementById("txtB2");
+    element.innerHTML = thaiLetterName[randomThaiLetter[4]];
+  } else {
+    element = document.getElementById("imgB2");
+    element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[4]];
+  }
+
+  element = document.getElementById("C2");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  if(Math.floor(Math.random() * 2)==0) {
+    element = document.getElementById("imgC2");
+    element.src = thaiLetterDirectory + "000black.jpg";  
+
+    element = document.getElementById("txtC2");
+    element.innerHTML = thaiLetterName[randomThaiLetter[5]];
+  } else {
+    element = document.getElementById("imgC2");
+    element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[5]];
+  }
+
+  element = document.getElementById("A3");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  if(Math.floor(Math.random() * 2)==0) {
+    element = document.getElementById("imgA3");
+    element.src = thaiLetterDirectory + "000black.jpg";  
+
+    element = document.getElementById("txtA3");
+    element.innerHTML = thaiLetterName[randomThaiLetter[6]];
+  } else {
+    element = document.getElementById("imgA3");
+    element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[6]];
+  }
+
+  element = document.getElementById("B3");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  if(Math.floor(Math.random() * 2)==0) {
+    element = document.getElementById("imgB3");
+    element.src = thaiLetterDirectory + "000black.jpg";  
+
+    element = document.getElementById("txtB3");
+    element.innerHTML = thaiLetterName[randomThaiLetter[7]];
+  } else {
+    element = document.getElementById("imgB3");
+    element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[7]];
+  }
+
+  element = document.getElementById("C3");
+  element.style.width="30%";
+  element.style.height="30%";
+  element.style.display="table-cell";
+
+  if(Math.floor(Math.random() * 2)==0) {
+    element = document.getElementById("imgC3");
+    element.src = thaiLetterDirectory + "000black.jpg";  
+
+    element = document.getElementById("txtC3");
+    element.innerHTML = thaiLetterName[randomThaiLetter[8]];
+  } else {
+    element = document.getElementById("imgC3");
+    element.src = thaiLetterDirectory + thaiLetter[randomThaiLetter[8]];
+  }
+}
+
+function randomThaiLetters()
 {
   var tmp = 0;
   var index = 0;
@@ -345,7 +687,11 @@ function fourRandomThaiLetters()
     randomThaiLetter[2]=randomThaiLetter[index];
     randomThaiLetter[index]=tmp;
   
-    displayFourRandomThaiLetters();
+    if(Math.floor(Math.random() * 2)==0) {
+      displayFourRandomThaiLetters();
+	} else {
+	  displayFourRandomThaiLetterNames();
+	}
   } else {
     randomThaiLetter[0] = thaiLetterIndex;
     randomThaiLetter[1] = Math.floor(Math.random() * 5);
@@ -377,9 +723,45 @@ function fourRandomThaiLetters()
       tmp=randomThaiLetter[i];
       randomThaiLetter[i]=randomThaiLetter[index];
       randomThaiLetter[index]=tmp;
-	}  
-    displayNineRandomThaiLetters();
+	}
+	if(score<100) {
+      if(Math.floor(Math.random() * 2)==0) {
+        displayNineRandomThaiLetters();
+      } else {
+	    displayNineRandomThaiLetterNames();
+      }
+	} else {
+	    displayNineRandomThaiLetterMix();
+	}
   }
+}
+
+function displayNameOfOneRandomThaiLetter()
+{
+  document.body.style.backgroundColor = "black";
+
+  var element = document.getElementById("ROW1");
+  element.style.width="100%";
+  element.style.height="90%";
+  element.style.display="table-row";
+  
+  element = document.getElementById("A1");
+  element.style.width="100%";
+  element.style.height="90%";
+  element.style.display="table-cell";
+  
+  element = document.getElementById("imgA1");
+  element.src = thaiLetterDirectory + thaiLetter[thaiLetterIndex];
+
+  element = document.getElementById("ROW2");
+  element.style.width="100%";
+  element.style.height="10%";
+  element.style.display="block";
+
+  element = document.getElementById("txtA1");
+  element.innerHTML=thaiLetterName[thaiLetterIndex];
+  
+  setTimeout(nextPhase, 1999);
 }
 
 function displayOneRandomThaiLetter()
@@ -399,21 +781,12 @@ function displayOneRandomThaiLetter()
   element = document.getElementById("imgA1");
   element.src = thaiLetterDirectory + thaiLetter[thaiLetterIndex];
 
-
-
   element = document.getElementById("ROW2");
   element.style.width="100%";
   element.style.height="10%";
   element.style.display="block";
 
-  element = document.getElementById("A1Info");
-  element.style.width="100%";
-  element.style.height="10%";
-  element.style.display="inline-block";
-  element.innerHTML=thaiLetterName[thaiLetterIndex];
-  
-
-  setTimeout(nextPhase, 2999);
+  setTimeout(nextPhase, 1999);
 }
 
 function oneRandomThaiLetter()
@@ -427,6 +800,9 @@ function blackBackgroundOnly()
   document.body.style.backgroundColor = "black";
   allElement.forEach(item => {
     document.getElementById(item).style.display="none";
+  });
+  allTextElement.forEach(item => {
+    document.getElementById(item).innerHTML="";
   });
   setTimeout(nextPhase, 999);
 }
@@ -442,7 +818,7 @@ function nextPhase()
 
 function main()
 {
-  score=0;
+  score=50;
   phaseIndex=0;
   phase[phaseIndex]();
 }
