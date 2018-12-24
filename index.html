@@ -158,6 +158,12 @@ function flashRed()
   if(score<0) score=0;
   document.getElementById("score").innerHTML="SCORE: " + score;
   phaseIndex=1;
+    allElement.forEach(item => {
+    document.getElementById(item).style.display="none";
+  });
+  allTextElement.forEach(item => {
+    document.getElementById(item).innerHTML="";
+  });
   setTimeout(displayOneRandomThaiLetter, 999);
 }
 
